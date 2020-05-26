@@ -47,6 +47,7 @@ export class TileHelper {
     this.shiftY = (bareBoard.level.height
                    - tileHelperHeight
                    - marginForAnimationControls) * tileSize;
+
     this.initialDraw();
   }
 

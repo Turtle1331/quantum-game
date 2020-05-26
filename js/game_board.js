@@ -3,7 +3,7 @@ import d3 from 'd3';
 import stringify from 'json-stringify-pretty-compact';
 import {saveAs} from 'file-saver';
 
-import {absorptionDuration, animationStepDurationMin, animationStepDurationMax, playPauseTransitionDuration, stockColumns, tileSize} from './config';
+import {absorptionDuration, animationStepDurationMin, animationStepDurationMax, playPauseTransitionDuration, stockColumns, tileSize, tileHelperHeight} from './config';
 import {Stock} from './stock';
 import * as level from './level';
 import {BareBoard} from './bare_board';
@@ -155,6 +155,28 @@ export class GameBoard {
     this.titleManager.blinkSvg.attr('viewBox', this.svg.attr('viewBox'));
     this.stock.elementCount(this.bareBoard.level);
     this.stock.drawStock();
+
+    this.fixLayout();
+  }
+
+  fixLayout() {
+    // Reset the tile helper
+    this.tileHelper = new TileHelper(this.svg, this.bareBoard, this.game);
+
+    // Resize the title bar and move the text
+    const titleBar = this.svg.select('.title-bar');
+    titleBar.select('rect')
+      .attr('width', `${this.bareBoard.level.width * tileSize}`);
+    titleBar.select('.title-text')
+        .attr('x', `${(this.bareBoard.level.width * 0.5 + 0.5) * tileSize}`);
+
+    // Move the subtitle bar
+    this.svg.select('.subtitle-bar')
+      .attr('transform', `translate(${(this.bareBoard.level.width * 0.5 - 6.5) * tileSize}, ${(this.bareBoard.level.height + 0.25) * tileSize})`)
+
+    // Move the board controls
+    this.boardControls
+      .attr('transform', `translate(${(this.bareBoard.level.width + 1.25) * tileSize}, ${(this.bareBoard.level.height - 2) * tileSize})`)
   }
 
   stop() {
