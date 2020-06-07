@@ -7,6 +7,7 @@ import levelsGame from '../data/levels_game.json!';
 import levelsCandidate from '../data/levels_candidate.json!';
 import levelsOther from '../data/levels_other.json!';
 import lastLevel from '../data/levels_last.json!';
+import levelsQubit from '../data/levels_qubit.json!';
 
 
 export class Level {
@@ -63,6 +64,7 @@ if (!isProduction) {
 export const levels = _(levelsGame)
   .concat(levelsCandidate)
   .concat(levelsOther)
+  .concat(levelsQubit)
   .map((level, i) => {
     level.i = i;
     level.id = levelId(level);
@@ -71,6 +73,7 @@ export const levels = _(levelsGame)
   .sortBy((level) => `${level.group} ${1e6 + level.i}`)
   .value();
 
+console.log('isProduction: ' + isProduction);
 if (isProduction) {
   lastLevel.i = -1;
   lastLevel.group = 'Special';
@@ -91,5 +94,6 @@ _(levels)
   );
 
 levels[0].i = '\u221E';
+console.log(levels);
 
 export const idToLevel = _.keyBy(levels, 'id');
