@@ -1,6 +1,12 @@
 Quantum Game with Photons
 ============
 
+***Note**: This is a fork. 99.9% of the credit goes to the original authors (below). This fork's changes consist of:*
+* *Fixing the level UI to tolerate different level sizes*
+* *Adding 5 non-puzzle levels that demonstrate unitary operations (aka rotations) on single qubits*
+
+*You can find the new levels in the game's menu toward the bottom (just above X Examples). Enjoy!*
+
 Quantum Game - play with photons, superposition and entanglement. In your browser! With true quantum mechanics underneath!
 
 
